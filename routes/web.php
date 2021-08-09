@@ -1,5 +1,6 @@
 <?php
 
+use Web\CompanyController;
 use Web\JobCostController;
 use Web\ProductResultController;
 use Web\ReleaseMaterialController;
@@ -51,6 +52,7 @@ Route::middleware('auth')->prefix('/master')->group(function () {
     Route::resource('product-type', ProductTypeController::class);
     Route::resource('warehouse', WarehouseController::class);
     Route::resource('warehouse.racks', WarehouseRackController::class)->shallow();
+    Route::resource('company', CompanyController::class);
 });
 
 /**

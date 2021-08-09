@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class History extends Pivot
 {
     use HasRack;
+    
     /**
      * The table associated with the model.
      *

@@ -42,6 +42,7 @@
 
                 <li class="nav-header">DATA MASTER</li>
                 @can('warehouse module')
+                <x-sidebar-menu label='Relation Company' :url="route('company.index')" icon='far fa-building' />
                 <x-sidebar-menu label='Product Type' :url="route('product-type.index')" icon='fas fa-tags' />
                 <x-sidebar-menu label='Warehouse' :url="route('warehouse.index')" icon='fas fa-warehouse' />
                 @endcan

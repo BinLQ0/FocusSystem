@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\JobCostController;
 use App\Http\Controllers\Api\JobCostReferanceController;
@@ -53,3 +54,6 @@ Route::get('/users', [UserController::class, 'index'])
 
 Route::get('/warehouses', [WarehouseController::class, 'index'])
     ->name('api.warehouses');
+
+Route::get('/company', [CompanyController::class, 'index'])
+    ->name('api.company');
