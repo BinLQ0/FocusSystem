@@ -11,6 +11,16 @@ class CompanyController extends Controller
     {
         $company = Company::query();
 
+        // Get Supplier Query
+        $company = $company->when(request('isSupplier', false), function ($q) {
+            return $q->where('is_supplier', 1);
+        });
+
+        // Get Supplier Query
+        $company = $company->when(request('isCustomer', false), function ($q) {
+            return $q->where('is_customer', 1);
+        });
+
         return $company->orderBy('name')->get();
     }
 }

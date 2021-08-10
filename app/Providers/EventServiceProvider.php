@@ -6,6 +6,7 @@ use App\Events\UserActivityEvent;
 use App\Listeners\UpdateDataListener;
 use App\Models\JobCost;
 use App\Models\ProductResult;
+use App\Models\ReceiveItem;
 use App\Models\ReleaseMaterial;
 use App\Observers\TransactionObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -34,5 +35,7 @@ class EventServiceProvider extends ServiceProvider
         ReleaseMaterial::observe(TransactionObserver::class);
         ProductResult::observe(TransactionObserver::class);
         JobCost::observe(TransactionObserver::class);
+
+        ReceiveItem::observe(TransactionObserver::class);
     }
 }

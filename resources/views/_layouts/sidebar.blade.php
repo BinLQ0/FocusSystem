@@ -35,13 +35,18 @@
                 <x-sidebar-menu label='Job Cost' :url="route('job-cost.index')" icon='fas fa-drafting-compass' />
                 @endcan
 
+                @can('warehouse module')
+                <li class="nav-header">DISTRIBUTION CENTER</li>
+                <x-sidebar-menu label='Receive item' :url="route('receive-item.index')" icon='fas fa-truck-loading' />
+                @endcan
+
                 @can('admin module')
                 <li class="nav-header">ADMINISTRATOR</li>
                 <x-sidebar-menu label='Users Management' :url="route('user.index')" icon='fas fa-users' />
                 @endcan
 
-                <li class="nav-header">DATA MASTER</li>
                 @can('warehouse module')
+                <li class="nav-header">DATA MASTER</li>
                 <x-sidebar-menu label='Relation Company' :url="route('company.index')" icon='far fa-building' />
                 <x-sidebar-menu label='Product Type' :url="route('product-type.index')" icon='fas fa-tags' />
                 <x-sidebar-menu label='Warehouse' :url="route('warehouse.index')" icon='fas fa-warehouse' />

@@ -1,5 +1,6 @@
 <?php
 
+use Web\ReceiveItemController;
 use Web\CompanyController;
 use Web\JobCostController;
 use Web\ProductResultController;
@@ -62,4 +63,11 @@ Route::middleware('auth')->prefix('/manufacture')->group(function () {
     Route::resource('release-material', ReleaseMaterialController::class);
     Route::resource('product-result', ProductResultController::class);
     Route::resource('job-cost', JobCostController::class);
+});
+
+/**
+ * Put Modul 'Warehouse' route on this line
+ */
+Route::middleware('auth')->prefix('/distribution')->group(function(){
+    Route::resource('receive-item', ReceiveItemController::class);
 });

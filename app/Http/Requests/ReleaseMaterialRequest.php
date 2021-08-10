@@ -26,10 +26,12 @@ class ReleaseMaterialRequest extends FormRequest
         $product = $this->product;
         $location = $this->location;
 
+        // Make Product and Location same size
         if (count($product) > count($location)) {
             array_pop($product);
         }
 
+        // Merge Request
         $this->merge([
             'product' => $product,
         ]);

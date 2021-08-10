@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CompanyRequest;
-use App\Models\Company;
+use App\Models\ReceiveItem;
+use Illuminate\Http\Request;
 
-class CompanyController extends Controller
+class ReceiveItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view('pages.company.index');
+        return view('pages.receive-item.index');
     }
 
     /**
@@ -25,7 +25,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('pages.company.createOrUpdate');
+        return view('pages.receive-item.createOrUpdate');
     }
 
     /**
@@ -34,48 +34,48 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CompanyRequest $request)
+    public function store(Request $request)
     {
-        Company::create($request->all());
+        ReceiveItem::create($request->all());
 
-        return redirect()->route('company.index')
+        return redirect()->intended(route('receive-item.index'))
             ->with('toast_success', 'Created Successfully!');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Company  $company
+     * @param  \App\Models\ReceiveItem  $receiveItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $company)
+    public function edit(ReceiveItem $receiveItem)
     {
-        return view('pages.company.createOrUpdate', compact('company'));
+        return view('pages.receive-item.createOrUpdate', compact('receiveItem'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Company  $company
+     * @param  \App\Models\ReceiveItem  $receiveItem
      * @return \Illuminate\Http\Response
      */
-    public function update(CompanyRequest $request, Company $company)
+    public function update(Request $request, ReceiveItem $receiveItem)
     {
-        $company->update($request->all());
+        $receiveItem->update($request->all());
 
-        return redirect()->route('company.index')
+        return redirect()->intended(route('receive-item.index'))
             ->with('toast_success', 'Created Successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Company  $company
+     * @param  \App\Models\ReceiveItem  $receiveItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy(ReceiveItem $receiveItem)
     {
-        $company->delete();
+        $receiveItem->delete();
     }
 }

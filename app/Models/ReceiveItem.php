@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\HasCompanyRelation;
 use App\Traits\Transaction;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ReceiveItem extends Model
 {
-    use HasFactory, Transaction;
+    use HasFactory, HasCompanyRelation, Transaction;
 
     /**
      * The accessors to append to the model's array form.

@@ -81,9 +81,13 @@ class InputProductList extends Component
         $views = collect(['product', 'location', 'quantity', 'stock']);
 
         // Filter
-        $this->views = (empty($only) && empty($except)) ? $views
-            : $views->filter(function ($value, $key) use ($only, $except) {
-                return in_array($value, $only) && !in_array($value, $except);
+        $this->views = $views
+            ->filter(function ($value, $key) use ($only) {
+                if (empty($only)) return true;
+                return in_array($value, $only);
+            })->filter(function ($value, $key) use ($except) {
+                if (empty($except)) return true;
+                return !in_array($value, $except);
             });
     }
 
