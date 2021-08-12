@@ -1,5 +1,7 @@
 <?php
 
+use Web\VehicleController;
+use Web\DeliveryOrderController;
 use Web\ReceiveItemController;
 use Web\CompanyController;
 use Web\JobCostController;
@@ -54,6 +56,7 @@ Route::middleware('auth')->prefix('/master')->group(function () {
     Route::resource('warehouse', WarehouseController::class);
     Route::resource('warehouse.racks', WarehouseRackController::class)->shallow();
     Route::resource('company', CompanyController::class);
+    Route::resource('vehicle', VehicleController::class);
 });
 
 /**
@@ -68,6 +71,7 @@ Route::middleware('auth')->prefix('/manufacture')->group(function () {
 /**
  * Put Modul 'Warehouse' route on this line
  */
-Route::middleware('auth')->prefix('/distribution')->group(function(){
+Route::middleware('auth')->prefix('/distribution')->group(function () {
     Route::resource('receive-item', ReceiveItemController::class);
+    Route::Resource('delivery-order', DeliveryOrderController::class);
 });

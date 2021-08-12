@@ -38,6 +38,7 @@
                 @can('warehouse module')
                 <li class="nav-header">DISTRIBUTION CENTER</li>
                 <x-sidebar-menu label='Receive item' :url="route('receive-item.index')" icon='fas fa-truck-loading' />
+                <x-sidebar-menu label='Delivery Order' :url="route('delivery-order.index')" icon='fas fa-truck-moving' />
                 @endcan
 
                 @can('admin module')
@@ -50,6 +51,7 @@
                 <x-sidebar-menu label='Relation Company' :url="route('company.index')" icon='far fa-building' />
                 <x-sidebar-menu label='Product Type' :url="route('product-type.index')" icon='fas fa-tags' />
                 <x-sidebar-menu label='Warehouse' :url="route('warehouse.index')" icon='fas fa-warehouse' />
+                <x-sidebar-menu label='Vehicle' :url="route('vehicle.index')" icon='fas fa-truck' />
                 @endcan
 
                 <li class="nav-header">PROFILE</li>

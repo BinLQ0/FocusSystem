@@ -1,6 +1,6 @@
 @extends('_layouts.base')
 
-@section('title', 'Receive Item')
+@section('title', 'Create Delivery')
 
 @section('css')
 
@@ -14,59 +14,64 @@
 <div class="row d-flex justify-content-center">
     <div class="col-6">
 
-        @if(isset($receiveItem))
+        @if(isset($deliveryOrder))
 
-            {{-- Update Receive --}}
-            <h2 class="mb-3"> Update Receive </h2>
+            {{-- Update Delivery Order --}}
+            <h2 class="mb-3"> Update Delivery Order </h2>
 
-            <form action='{{ route("receive-item.update", ['receive_item' => $receiveItem->id]) }}' method='POST'
+            <form action='{{ route("delivery-order.update", ['delivery_order' => $deliveryOrder->id]) }}' method='POST'
                 class="form-horizontal">
                 @method('PUT')
 
-            {{-- ./Update Receive --}}
-        @else
+                {{-- ./Update Delivery Order --}}
+            @else
 
-            {{-- Create Receive --}}
-            <h2 class="mb-3"> Create Receive </h2>
+                {{-- Create Delivery Order --}}
+                <h2 class="mb-3"> Create Delivery Order </h2>
 
-            <form action='{{ route("receive-item.store") }}' method='POST' class="form-horizontal">
-                @method('POST')
+                <form action='{{ route("delivery-order.store") }}' method='POST' class="form-horizontal">
+                    @method('POST')
 
-            @php
-                $receiveItem = null;
-            @endphp
+                    @php
+                        $deliveryOrder = null;
+                    @endphp
 
-            {{-- ./Create Receive --}}
+                    {{-- ./Create Delivery Order --}}
         @endif
 
         {{-- Token --}}
         @csrf
-        
+
         <x-card>
 
             <div class="row">
                 <div class="col-6">
-                    <x-input daterangepicker name='date' label="Receive Date" :bind="$receiveItem"/>
+                    <x-input daterangepicker name='date' label="Delivery Date" :bind='$deliveryOrder' />
                 </div>
                 <div class="col-6">
-                    <x-input name='for' label='No. Receive Item' :bind="$receiveItem"/>
+                    <x-input name='for' label='No. Delivery Order' :bind='$deliveryOrder' />
                 </div>
                 <div class="col-12">
-                    <x-select name='company_id' label='Vendor' :option='$receiveItem ? [optional($receiveItem->company)->id => optional($receiveItem->company)->name] : []' :selected='optional($receiveItem)->id'/>
+                    <x-select name='company_id' label='Customer' :option='$deliveryOrder ? [optional($deliveryOrder->company)->id => optional($deliveryOrder->company)->name] : []'
+                        :selected='$deliveryOrder ? optional($deliveryOrder->company)->id : []' />
+                </div>
+                <div class="col-12">
+                    <x-select name='vehicle_id' label='Vehicle' :option='$deliveryOrder ? [optional($deliveryOrder->vehicle)->id => optional($deliveryOrder->vehicle)->fullName] : []'
+                        :selected='$deliveryOrder ? optional($deliveryOrder->vehicle)->id : []' />
                 </div>
             </div>
 
         </x-card>
 
         <x-card theme-mode='outline' theme='primary' body-class='p-0'>
-            <x-input-product-list title='Product' :except='["stock"]' :products='optional($receiveItem)->products' />
+            <x-input-product-list title='Product' :products='optional($deliveryOrder)->products' />
         </x-card>
 
         <div class="text-right">
             <button type="submit" class="btn btn-primary mt-3">Save</button>
         </div>
 
-            </form>
+        </form>
     </div>
 </div>
 @endsection
@@ -83,6 +88,7 @@
     <script>
         $(document).ready(function() {
             var $numLot = $('select[name="company_id"]');
+            var $vehicle = $('select[name="vehicle_id"]');
 
             $numLot.select2({
                 placeholder : '.. Select ..',
@@ -91,7 +97,7 @@
                     url: '{{ route("api.company") }}',
                     data: function(params) {
                         var queryParameters = {
-                            isSupplier: true,
+                            isCustomer: true,
                         }
 
                         return queryParameters;
@@ -102,6 +108,24 @@
                                 return {
                                     id: obj.id,
                                     text: obj.name,
+                                };
+                            })
+                        };
+                    }
+                }
+            });
+
+            $vehicle.select2({
+                placeholder : '.. Select ..',
+                ajax: {
+                    delay: 250,
+                    url: '{{ route("api.vehicle") }}',
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data, function(obj) {
+                                return {
+                                    id: obj.id,
+                                    text: obj.full_name,
                                 };
                             })
                         };

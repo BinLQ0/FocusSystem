@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\HasCompanyRelation;
 use App\Traits\Transaction;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class DeliveryOrder extends Model
 {
-    use HasFactory, Transaction;
+    use HasFactory, HasCompanyRelation, Transaction;
 
     /**
      * The accessors to append to the model's array form.
@@ -16,7 +17,7 @@ class DeliveryOrder extends Model
      * @var array
      */
     protected $appends = ['type'];
-    
+
     /**
      * Determine the transaction type.
      *
@@ -40,4 +41,12 @@ class DeliveryOrder extends Model
      * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * Get Vehicle Details
+     */
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
+    }
 }

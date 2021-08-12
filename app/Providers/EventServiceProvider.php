@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\UserActivityEvent;
 use App\Listeners\UpdateDataListener;
+use App\Models\DeliveryOrder;
 use App\Models\JobCost;
 use App\Models\ProductResult;
 use App\Models\ReceiveItem;
@@ -37,5 +38,6 @@ class EventServiceProvider extends ServiceProvider
         JobCost::observe(TransactionObserver::class);
 
         ReceiveItem::observe(TransactionObserver::class);
+        DeliveryOrder::observe(TransactionObserver::class);
     }
 }

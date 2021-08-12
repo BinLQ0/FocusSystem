@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\DeliveryOrderController;
 use App\Http\Controllers\Api\JobCostController;
 use App\Http\Controllers\Api\JobCostReferanceController;
 use App\Http\Controllers\Api\ProductController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Api\ReleaseMaterialController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WarehouseController;
 use App\Http\Controllers\Api\ReceiveItemController;
+use App\Http\Controllers\Api\VehicleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/company', [CompanyController::class, 'index'])
     ->name('api.company');
+
+Route::get('/delivery', [DeliveryOrderController::class, 'index'])
+    ->name('api.delivery');
 
 Route::get('/job-cost', [JobCostController::class, 'index'])
     ->name('api.jobcost');
@@ -56,3 +61,6 @@ Route::get('/users', [UserController::class, 'index'])
 
 Route::get('/warehouses', [WarehouseController::class, 'index'])
     ->name('api.warehouses');
+
+    Route::get('/vehicle', [VehicleController::class, 'index'])
+    ->name('api.vehicle');
