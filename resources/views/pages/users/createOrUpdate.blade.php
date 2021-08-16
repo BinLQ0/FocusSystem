@@ -42,6 +42,7 @@
         <x-card theme='primary' theme-mode='outline'>
 
             <x-input name='username' label='Username' :bind='$user' />
+            <x-input name='fullname' label='Full Name' :bind='$user' />
             <x-input name='password' type='password' label='Password' placeholder='******' />
             <x-input name='password_confirmation' type='password' label='Password Confirmation' placeholder='******' />
 

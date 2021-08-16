@@ -49,4 +49,12 @@ class DeliveryOrder extends Model
     {
         return $this->belongsTo(Vehicle::class);
     }
+
+    /**
+     * Get Driver Details
+     */
+    public function driver()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>Username</th>
+            <th>Full Name</th>
             <th>Last Seen At</th>
             <th>IP Access</th>
             <th>Action</th>
@@ -28,6 +29,8 @@
             }],
             columns: [{
                 data: 'username'
+            }, {
+                data: 'fullname'
             }, {
                 data: 'last_seen_at',
             }, {

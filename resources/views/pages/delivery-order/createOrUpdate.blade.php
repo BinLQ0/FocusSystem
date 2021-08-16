@@ -59,6 +59,10 @@
                     <x-select name='vehicle_id' label='Vehicle' :option='$deliveryOrder ? [optional($deliveryOrder->vehicle)->id => optional($deliveryOrder->vehicle)->fullName] : []'
                         :selected='$deliveryOrder ? optional($deliveryOrder->vehicle)->id : []' />
                 </div>
+                <div class="col-12">
+                    <x-select name='driver_id' label='Driver' :option='$deliveryOrder ? [optional($deliveryOrder->driver)->id => optional($deliveryOrder->driver)->fullname] : []'
+                        :selected='$deliveryOrder ? optional($deliveryOrder->driver)->id : []' />
+                </div>
             </div>
 
         </x-card>
@@ -89,9 +93,10 @@
         $(document).ready(function() {
             var $numLot = $('select[name="company_id"]');
             var $vehicle = $('select[name="vehicle_id"]');
+            var $driver = $('select[name="driver_id"]');
 
             $numLot.select2({
-                placeholder : '.. Select ..',
+                placeholder: '.. Select ..',
                 ajax: {
                     delay: 250,
                     url: '{{ route("api.company") }}',
@@ -116,16 +121,41 @@
             });
 
             $vehicle.select2({
-                placeholder : '.. Select ..',
+                placeholder: '.. Select ..',
                 ajax: {
                     delay: 250,
                     url: '{{ route("api.vehicle") }}',
                     processResults: function(data) {
                         return {
-                            results: $.map(data, function(obj) {
+                            results: $.map(data.data, function(obj) {
                                 return {
                                     id: obj.id,
                                     text: obj.full_name,
+                                };
+                            })
+                        };
+                    }
+                }
+            });
+
+            $driver.select2({
+                placeholder: '.. Select ..',
+                ajax: {
+                    delay: 250,
+                    url: '{{ route("api.users") }}',
+                    data: function(params) {
+                        var queryParameters = {
+                            roles: 'driver',
+                        }
+
+                        return queryParameters;
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data.data, function(obj) {
+                                return {
+                                    id: obj.id,
+                                    text: obj.fullname,
                                 };
                             })
                         };

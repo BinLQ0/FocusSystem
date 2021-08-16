@@ -40,7 +40,7 @@ class UserController extends Controller
         // Store to Database
         User::create($request->validated());
 
-        return redirect(route('users.index'))
+        return redirect(route('user.index'))
             ->with('toast_success', 'User Created Successfully!');
     }
 
@@ -65,9 +65,9 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         // Update to Database
-        $user->update($request->validate());
+        $user->update($request->validated());
 
-        return redirect(route('users.index'))
+        return redirect(route('user.index'))
             ->with('toast_success', 'User Updated Successfully!');
     }
 

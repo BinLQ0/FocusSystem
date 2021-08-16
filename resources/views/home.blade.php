@@ -4,6 +4,6 @@
 
 @section('content')
 <div class="title m-b-md">
-    Hello, {{ Auth::user()->username }}
+    Hello, {{ Auth::user()->fullname }}
 </div>
 @endsection

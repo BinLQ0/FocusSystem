@@ -27,6 +27,7 @@ class UserRequest extends FormRequest
             case 'POST': {
                     return [
                         'username' => 'required|unique:users',
+                        'fullname' => 'required',
                         'password' => 'required|confirmed|min:4',
                     ];
                 }
@@ -34,6 +35,7 @@ class UserRequest extends FormRequest
             case 'PATCH': {
                     return [
                         'username'  => 'sometimes|required|unique:users,username,' . $this->user['id'],
+                        'fullname'  => 'required',
                         'password'  => 'sometimes|required|confirmed|min:4',
                     ];
                 }

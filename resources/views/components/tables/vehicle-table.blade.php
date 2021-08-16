@@ -18,7 +18,7 @@
             ajax: {
                 url: '{{ route("api.vehicle") }}',
                 type: 'GET',
-                dataSrc: ''
+                dataSrc: 'data'
             },
             columnDefs: [{
                 targets: -1,
@@ -31,9 +31,9 @@
             columns: [{
                 data: 'name'
             }, {
-                data: 'plateNumber'
+                data: 'plate_number'
             },{
-                data: 'loadCapacity'
+                data: 'load_capacity'
             }, {
                 data: 'action'
             }, ]
