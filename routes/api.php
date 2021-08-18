@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\AdjustmentController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\DeliveryOrderController;
+use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\JobCostController;
 use App\Http\Controllers\Api\JobCostReferanceController;
 use App\Http\Controllers\Api\ProductController;
@@ -40,6 +42,9 @@ Route::get('/job-cost-referance', [JobCostReferanceController::class, 'index'])
 
 Route::get('/products', [ProductController::class, 'index'])
     ->name('api.products');
+  
+Route::get('/products/{product}/history', [HistoryController::class, 'index'])
+->name('api.history');
 
 Route::get('/product-result', [ProductResultController::class, 'index'])
     ->name('api.result');
@@ -64,3 +69,6 @@ Route::get('/warehouses', [WarehouseController::class, 'index'])
 
     Route::get('/vehicle', [VehicleController::class, 'index'])
     ->name('api.vehicle');
+
+    Route::get('/adjustment', [AdjustmentController::class, 'index'])
+    ->name('api.adjustment');

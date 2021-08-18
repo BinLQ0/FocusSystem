@@ -39,7 +39,7 @@ $(document).ready(function() {
             var input = search.val();
 
             var result = true;
-
+            
             if (settings.nTable.id !== 'product') {
                 result = (dDate.isAfter(dStart) && dDate.isBefore(dEnd)) ? true : false;
             }

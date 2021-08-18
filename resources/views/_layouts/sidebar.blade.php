@@ -41,6 +41,11 @@
                 <x-sidebar-menu label='Delivery Order' :url="route('delivery-order.index')" icon='fas fa-truck-moving' />
                 @endcan
 
+                @can('warehouse module')
+                <li class="nav-header">WAREHOUSE</li>
+                <x-sidebar-menu label='Adjustment' :url="route('adjustment.index')" icon='fas fa-pencil-ruler' />
+                @endcan
+
                 @can('admin module')
                 <li class="nav-header">ADMINISTRATOR</li>
                 <x-sidebar-menu label='Users Management' :url="route('user.index')" icon='fas fa-users' />

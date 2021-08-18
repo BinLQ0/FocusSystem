@@ -26,6 +26,11 @@ class ProductController extends Controller
             $q->ofType(request('type'));
         });
 
+         // Check if request has 'search' text
+         $products = $products->when(request()->has('limit'), function ($q) {
+            $q->limit(request('limit'));
+        });
+
         // Relation & Order
         $products = $products->with('history')->orderBy('name');
 

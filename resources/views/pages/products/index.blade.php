@@ -36,5 +36,4 @@
 <script src="{{ url::asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <!-- Filter -->
 <script src="{{ url::asset('plugins/moment/moment.min.js') }}"></script>
-<script src="{{ url::asset('js/datatable/filter.js')}}"></script>
 @endsection

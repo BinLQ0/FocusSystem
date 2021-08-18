@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Events\UserActivityEvent;
 use App\Listeners\UpdateDataListener;
+use App\Models\Adjustment;
 use App\Models\DeliveryOrder;
+use App\Models\InitializeStock;
 use App\Models\JobCost;
 use App\Models\ProductResult;
 use App\Models\ReceiveItem;
@@ -33,11 +35,14 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         // Register Observer
+        InitializeStock::observe(TransactionObserver::class);
+
         ReleaseMaterial::observe(TransactionObserver::class);
         ProductResult::observe(TransactionObserver::class);
         JobCost::observe(TransactionObserver::class);
 
         ReceiveItem::observe(TransactionObserver::class);
         DeliveryOrder::observe(TransactionObserver::class);
+        Adjustment::observe(TransactionObserver::class);
     }
 }

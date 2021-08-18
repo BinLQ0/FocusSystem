@@ -54,4 +54,6 @@
         });
 
     </script>
+
+<script src="{{ url::asset('js/datatable/filter.js') }}"></script>
 @endpush
