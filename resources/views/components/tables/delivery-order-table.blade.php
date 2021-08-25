@@ -4,6 +4,8 @@
             <th>Date</th>
             <th>No. Delivery</th>
             <th>Customer</th>
+            <th>Vehicle</th>
+            <th>Driver</th>
             <th></th>
         </tr>
     </thead>
@@ -38,6 +40,15 @@
                 {
                     data: 'company.name',
                     className: "text-left",
+                    defaultContent: '-'
+                },{
+                    data: 'vehicle.name',
+                    className: "text-center",
+                    defaultContent: '-'
+                },
+                {
+                    data: 'driver.fullname',
+                    className: "text-center",
                     defaultContent: '-'
                 },
                 {

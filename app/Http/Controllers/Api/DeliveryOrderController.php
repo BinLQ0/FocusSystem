@@ -26,6 +26,6 @@ class DeliveryOrderController extends Controller
             ]);
         });
 
-        return $delivery->with('company')->orderBy('date')->get();
+        return $delivery->with(['company', 'vehicle', 'driver'])->orderBy('date')->get();
     }
 }
