@@ -15,14 +15,7 @@ class HistoryViewController extends Controller
      */
     public function __invoke(Product $product)
     {
-        $racks = $product->history
-            ->load('rack')
-            ->groupBy('rack.code')
-            ->mapWithKeys(function ($group, $key) {
-                return [
-                    $key => $group->calculateStock()
-                ];
-            });
+        $racks = $product->calculateUniqueOf('rack.code', 'rack');
 
         return view('pages.history.view', compact('product', 'racks'));
     }

@@ -40,10 +40,10 @@ class Product extends Model
     /**
      * Get unique value from relation
      */
-    public function uniqueOf($history, $column)
+    public function calculateUniqueOf($column, $relation)
     {
-        return $this->$history
-            ->load('rack')
+        return $this->history
+            ->load($relation)
             ->groupBy($column)
             ->mapWithKeys(function ($group, $key) {
                 return [

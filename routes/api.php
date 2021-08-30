@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\ReleaseMaterialController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WarehouseController;
 use App\Http\Controllers\Api\ReceiveItemController;
+use App\Http\Controllers\Api\StocktackingController;
 use App\Http\Controllers\Api\VehicleController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,9 +43,9 @@ Route::get('/job-cost-referance', [JobCostReferanceController::class, 'index'])
 
 Route::get('/products', [ProductController::class, 'index'])
     ->name('api.products');
-  
+
 Route::get('/products/{product}/history', [HistoryController::class, 'index'])
-->name('api.history');
+    ->name('api.history');
 
 Route::get('/product-result', [ProductResultController::class, 'index'])
     ->name('api.result');
@@ -67,8 +68,11 @@ Route::get('/users', [UserController::class, 'index'])
 Route::get('/warehouses', [WarehouseController::class, 'index'])
     ->name('api.warehouses');
 
-    Route::get('/vehicle', [VehicleController::class, 'index'])
+Route::get('/vehicle', [VehicleController::class, 'index'])
     ->name('api.vehicle');
 
-    Route::get('/adjustment', [AdjustmentController::class, 'index'])
+Route::get('/adjustment', [AdjustmentController::class, 'index'])
     ->name('api.adjustment');
+
+Route::post('exportStock', [StocktackingController::class, 'exportToExcel'])
+    ->name('export.stock');

@@ -34,6 +34,7 @@
 
             <div class="col-4">
                 <x-button id='btn_create' :url='route("adjustment.create")' class='bg-success btn-sm' icon='far fa-plus-square' label='Create' />
+                <x-button id='btn_download' :url='route("cutOffStock")' class='bg-primary btn-sm' icon='fas fa-file-download' label='Data Stocktaking' />
             </div>
 
             <div class="col-3">

@@ -6,7 +6,7 @@ use App\Models\JobCost;
 use App\Models\JobCostReferance;
 use Illuminate\Database\Seeder;
 
-class JobCostreferenceseeder extends Seeder
+class JobCostReferenceseeder extends Seeder
 {
     /**
      * Run the database seeds.

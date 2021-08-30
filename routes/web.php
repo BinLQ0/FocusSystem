@@ -1,5 +1,6 @@
 <?php
 
+use Web\CutOffStocktackingController;
 use Web\AdjustmentController;
 use Web\VehicleController;
 use Web\DeliveryOrderController;
@@ -82,4 +83,6 @@ Route::middleware('auth')->prefix('/distribution')->group(function () {
  */
 Route::middleware('auth')->prefix('/warehouse')->group(function () {
     Route::resource('adjustment', AdjustmentController::class);
+
+    Route::get('stocktacking/cut-off-stock', CutOffStocktackingController::class)->name('cutOffStock');
 });
