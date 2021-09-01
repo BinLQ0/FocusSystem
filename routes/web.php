@@ -1,5 +1,7 @@
 <?php
 
+use Web\RoleController;
+use Auth\ChangePasswordController;
 use Web\CutOffStocktackingController;
 use Web\AdjustmentController;
 use Web\VehicleController;
@@ -41,6 +43,9 @@ Route::post('/login', AttemptLoginController::class)
 Route::get('/logout', LogoutController::class)
     ->name('logout');
 
+Route::get('/change-password', ChangePasswordController::class)
+    ->name('user.change.password');
+
 Route::middleware('auth')->group(function () {
     Route::view('/', 'home')->name('home');
 
@@ -48,6 +53,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('product', ProductController::class);
     Route::resource('user', UserController::class);
+    Route::resource('role', RoleController::class);
 });
 
 /**

@@ -11,8 +11,10 @@ use App\Models\JobCost;
 use App\Models\ProductResult;
 use App\Models\ReceiveItem;
 use App\Models\ReleaseMaterial;
+use App\Observers\RoleObserver;
 use App\Observers\TransactionObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Spatie\Permission\Models\Role;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -44,5 +46,7 @@ class EventServiceProvider extends ServiceProvider
         ReceiveItem::observe(TransactionObserver::class);
         DeliveryOrder::observe(TransactionObserver::class);
         Adjustment::observe(TransactionObserver::class);
+
+        Role::observe(RoleObserver::class);
     }
 }

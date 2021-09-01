@@ -15,24 +15,24 @@
         @if(isset($user))
 
             {{-- Update User --}}
-            <h2 class="mb-3"> Update User </h2>
+            <h2 class="mb-3"> Update Profile User </h2>
 
             <form action='{{ route("user.update", ['user' => $user->id]) }}' method='POST'>
-            @method('PUT')
-            {{-- ./Update User --}}
+                @method('PUT')
+                {{-- ./Update User --}}
 
-        @else
+            @else
 
-            {{-- Create User --}}
-            <h2 class="mb-3"> Create User </h2>
+                {{-- Create User --}}
+                <h2 class="mb-3"> Create User </h2>
 
-            <form action='{{ route("user.store") }}' method='POST'>
-            @method('POST')
-            {{-- ./Create User --}}
-            
-            @php
-                $user = null    
-            @endphp
+                <form action='{{ route("user.store") }}' method='POST'>
+                    @method('POST')
+                    {{-- ./Create User --}}
+
+                    @php
+                        $user = null
+                    @endphp
 
         @endif
 
@@ -43,8 +43,6 @@
 
             <x-input name='username' label='Username' :bind='$user' />
             <x-input name='fullname' label='Full Name' :bind='$user' />
-            <x-input name='password' type='password' label='Password' placeholder='******' />
-            <x-input name='password_confirmation' type='password' label='Password Confirmation' placeholder='******' />
 
         </x-card>
 
@@ -53,8 +51,30 @@
         </div>
 
         </form>
-
     </div>
+
+    @if(isset($user))
+        <div class="col-3">
+            <h2 class="mb-3"> Change Password </h2>
+
+            <form action='{{ route("user.change.password", ['user' => $user->id]) }}' method='POST' class='mt-3'>
+                @method('PUT')
+
+                {{-- Token --}}
+                @csrf
+
+                <x-card theme='primary' theme-mode='outline'>
+                    <x-input name='password' type='password' label='Password' placeholder='******' />
+                    <x-input name='password_confirmation' type='password' label='Password Confirmation' placeholder='******' />
+                </x-card>
+
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary">Change</button>
+                </div>
+
+            </form>
+        </div>
+    @endif
 </div>
 @endsection
 

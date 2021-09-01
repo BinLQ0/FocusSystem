@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\ReleaseMaterialController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WarehouseController;
 use App\Http\Controllers\Api\ReceiveItemController;
+use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\StocktackingController;
 use App\Http\Controllers\Api\VehicleController;
 use Illuminate\Support\Facades\Route;
@@ -76,3 +77,6 @@ Route::get('/adjustment', [AdjustmentController::class, 'index'])
 
 Route::post('exportStock', [StocktackingController::class, 'exportToExcel'])
     ->name('export.stock');
+
+    Route::get('role', [RoleController::class, 'index'])
+    ->name('api.role');

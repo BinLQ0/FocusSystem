@@ -49,6 +49,7 @@
                 @can('admin module')
                 <li class="nav-header">ADMINISTRATOR</li>
                 <x-sidebar-menu label='Users Management' :url="route('user.index')" icon='fas fa-users' />
+                <x-sidebar-menu label='Roles Management' :url="route('role.index')" icon='fas fa-user-tag' />
                 @endcan
 
                 @can('warehouse module')
