@@ -29,23 +29,23 @@ class StockExport implements FromCollection, WithHeadings, WithMapping, WithStri
     {
         $collection = collect();
 
-        // Put data into Collection
-        Product::with(['racks.warehouse', 'history'])->chunk(100, function ($products) use ($collection) {
-            foreach ($products as $product) {
-                foreach ($product->racks->unique('code') as $rack) {
+        // Get Products
+        $products = Product::with('history')->get();
+        foreach ($products as $product) {
 
-                    $rackWithHistory = $rack->filterHistory('product_id', $products);
+            // Get Racks by Product
+            $racks = $product->calculateUniqueOf('rack.code', 'rack');
+            foreach ($racks as $rack_code => $rack_quantity) {
 
-                    $collection->push([
-                        'product_name'          => $product->name,
-                        'product_description'   => $product->description,
-                        'warehouse'             => $rack->warehouse->name,
-                        'location'              => $rack->code,
-                        'quantity'              => $rackWithHistory->history->calculateStock()
-                    ]);
-                }
+                // Push Data to Collection
+                $collection->push([
+                    'product_name'          => $product->name,
+                    'product_description'   => $product->description,
+                    'location'              => $rack_code,
+                    'quantity'              => $rack_quantity
+                ]);
             }
-        });
+        }
 
         return $collection;
     }
@@ -58,7 +58,6 @@ class StockExport implements FromCollection, WithHeadings, WithMapping, WithStri
         return [
             'Product Name',
             'Description',
-            'Warehouse',
             'Location',
             'Actual Quantity'
         ];
@@ -72,7 +71,6 @@ class StockExport implements FromCollection, WithHeadings, WithMapping, WithStri
         return [
             $item['product_name'],
             $item['product_description'],
-            $item['warehouse'],
             $item['location'],
             $item['quantity']
         ];

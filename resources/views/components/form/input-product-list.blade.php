@@ -1,3 +1,7 @@
+@if($location == 'all')
+    <input type="hidden" name="all_location" value="1">
+@endif
+
 <table id="material" class="table table-hover text-nowrap datatable" style="width:100%">
     <thead>
         <tr>
@@ -24,17 +28,17 @@
 
         @if(old('product'))
             @foreach(old('product') as $value)
-                <x-product-list :product-option='$productOption' :row='$loop' :views=$views/>
+                <x-product-list :product-option='$productOption' :row='$loop' :views=$views />
             @endforeach
         @else
 
             @isset($products)
                 @foreach($products as $product)
-                    <x-product-list :product-option='$productOption' :product='$product' :row='$loop' :views=$views/>
+                    <x-product-list :product-option='$productOption' :product='$product' :row='$loop' :views=$views />
                 @endforeach
             @endisset
 
-            <x-product-list :product-option='$productOption' :views=$views/>
+            <x-product-list :product-option='$productOption' :views=$views />
         @endif
     </tbody>
 </table>
@@ -128,11 +132,13 @@
          *******************************************************/
         $('#material tbody').on('select2:select', 'select[name="product[]"]', function(e) {
             var index = $(this).closest("tr");
+            var $is_all_location = $('input[name="all_location"]');
 
             // Set Params to Get Location
             var params = {
                 product: $(this).val(),
                 stock: $(this).hasViewStock(),
+                all_location: $is_all_location.val(),
             };
 
             // Get Location

@@ -27,7 +27,7 @@ class RackController extends Controller
         });
 
         // Get by Product ID
-        $racks = $racks->when(request()->has('product'), function ($q) {
+        $racks = $racks->when(request()->has('product') && !request('all_location', 0), function ($q) {
             return $q->filterHistory('product_id', request('product'));
         });
 

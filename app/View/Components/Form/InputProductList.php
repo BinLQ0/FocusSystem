@@ -42,14 +42,24 @@ class InputProductList extends Component
     public $views;
 
     /**
+     * Describe location list you needed
+     * 'request' : Location by where the product placed
+     * 'all'     : Open All Location
+     * 
+     * @var Illuminate\Support\Collection
+     */
+    public $location;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(?Collection $products, $title = null, $productType = null, array $only = [], array $except = [])
+    public function __construct(?Collection $products, $title = null, $productType = null, array $only = [], array $except = [], string $location = 'request')
     {
         $this->title        = $title;
         $this->productType  = $productType;
+        $this->location     = $location;
 
         $this->products     = optional($products)->load('history.rack.warehouse');
 

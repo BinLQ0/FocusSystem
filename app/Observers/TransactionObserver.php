@@ -14,7 +14,7 @@ class TransactionObserver
      */
     public function saving($event)
     {
-        
+
         if (!($event instanceof ProductResult)) {
             return;
         }
@@ -50,6 +50,7 @@ class TransactionObserver
                 $products[$index] => [
                     'quantity'  => $quantity[$index],
                     'rack_id'   => $locations[$index],
+                    'account'   => $event->getTypeAttribute(),
                 ]
             ]);
         }

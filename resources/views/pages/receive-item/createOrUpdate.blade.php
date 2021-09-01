@@ -19,54 +19,56 @@
             {{-- Update Receive --}}
             <h2 class="mb-3"> Update Receive </h2>
 
-            <form action='{{ route("receive-item.update", ['receive_item' => $receiveItem->id]) }}' method='POST'
-                class="form-horizontal">
+            <form action='{{ route("receive-item.update", ['receive_item' => $receiveItem->id]) }}' method='POST' class="form-horizontal">
                 @method('PUT')
 
-            {{-- ./Update Receive --}}
-        @else
+                {{-- ./Update Receive --}}
+            @else
 
-            {{-- Create Receive --}}
-            <h2 class="mb-3"> Create Receive </h2>
+                {{-- Create Receive --}}
+                <h2 class="mb-3"> Create Receive </h2>
 
-            <form action='{{ route("receive-item.store") }}' method='POST' class="form-horizontal">
-                @method('POST')
+                <form action='{{ route("receive-item.store") }}' method='POST' class="form-horizontal">
+                    @method('POST')
 
-            @php
-                $receiveItem = null;
-            @endphp
+                    @php
+                        $receiveItem = null;
+                    @endphp
 
-            {{-- ./Create Receive --}}
+                    {{-- ./Create Receive --}}
         @endif
 
         {{-- Token --}}
         @csrf
-        
+
         <x-card>
 
             <div class="row">
                 <div class="col-6">
-                    <x-input daterangepicker name='date' label="Receive Date" :bind="$receiveItem"/>
+                    <x-input daterangepicker name='date' label="Receive Date" :bind="$receiveItem" />
                 </div>
+                
                 <div class="col-6">
-                    <x-input name='for' label='No. Receive Item' :bind="$receiveItem"/>
+                    <x-input name='for' label='No. Receive Item' :bind="$receiveItem" />
                 </div>
+                
                 <div class="col-12">
-                    <x-select name='company_id' label='Vendor' :option='$receiveItem ? [optional($receiveItem->company)->id => optional($receiveItem->company)->name] : []' :selected='optional($receiveItem)->id'/>
+                    <x-select name='company_id' label='Vendor' :option='$receiveItem ? [optional($receiveItem->company)->id => optional($receiveItem->company)->name] : []'
+                        :selected='optional($receiveItem)->id' />
                 </div>
             </div>
 
         </x-card>
 
         <x-card theme-mode='outline' theme='primary' body-class='p-0'>
-            <x-input-product-list title='Product' :except='["stock"]' :products='optional($receiveItem)->products' />
+            <x-input-product-list title='Product' :except='["stock"]' :products='optional($receiveItem)->products' location='all' />
         </x-card>
 
         <div class="text-right">
             <button type="submit" class="btn btn-primary mt-3">Save</button>
         </div>
 
-            </form>
+        </form>
     </div>
 </div>
 @endsection
@@ -85,7 +87,7 @@
             var $numLot = $('select[name="company_id"]');
 
             $numLot.select2({
-                placeholder : '.. Select ..',
+                placeholder: '.. Select ..',
                 ajax: {
                     delay: 250,
                     url: '{{ route("api.company") }}',
