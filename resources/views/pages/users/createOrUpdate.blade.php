@@ -43,6 +43,8 @@
 
             <x-input name='username' label='Username' :bind='$user' />
             <x-input name='fullname' label='Full Name' :bind='$user' />
+            <x-select name='role_id' label='Role' :option='$user ? [optional($user->roles->first())->id => optional($user->roles->first())->name] : []'
+                :selected='optional($user->roles->first())->id'/>
 
         </x-card>
 
@@ -81,4 +83,27 @@
 @section('js')
 {{-- Select 2 --}}
 <script src="{{ URL::asset('plugins/select2/js/select2.full.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+            var $numLot = $('select[name="role_id"]');
+
+            $numLot.select2({
+                placeholder: '.. Select Role ..',
+                ajax: {
+                    delay: 250,
+                    url: '{{ route("api.role") }}',
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data, function(obj) {
+                                return {
+                                    id: obj.id,
+                                    text: obj.name,
+                                };
+                            })
+                        };
+                    }
+                }
+            });
+        });
+</script>
 @endsection

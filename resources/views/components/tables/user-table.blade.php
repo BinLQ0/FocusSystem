@@ -3,6 +3,7 @@
         <tr>
             <th>Username</th>
             <th>Full Name</th>
+            <th>Role</th>
             <th>Last Seen At</th>
             <th>IP Access</th>
             <th>Action</th>
@@ -31,6 +32,8 @@
                 data: 'username'
             }, {
                 data: 'fullname'
+            }, {
+                data: 'role'
             }, {
                 data: 'last_seen_at',
             }, {

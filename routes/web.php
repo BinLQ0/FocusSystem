@@ -52,8 +52,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/product/{product}/history', HistoryViewController::class);
 
     Route::resource('product', ProductController::class);
-    Route::resource('user', UserController::class);
-    Route::resource('role', RoleController::class);
+
+    Route::middleware(['role:Administrator'])->group(function () {
+        Route::resource('user', UserController::class);
+        Route::resource('role', RoleController::class);
+    });
 });
 
 /**

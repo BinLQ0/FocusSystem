@@ -24,15 +24,21 @@ class SidebarMenu extends Component
     public $label;
 
     /**
+     * @var string
+     */
+    public $permission;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($label = 'Menu', string $url = '#', string $icon = 'fas fa-circle nav-icon')
+    public function __construct($label = 'Menu', string $url = '#', string $icon = 'fas fa-circle nav-icon', string $can = null)
     {
         $this->label    = $label;
         $this->icon     = $icon;
         $this->url      = $url;
+        $this->permission = $can;
     }
 
     /**
@@ -42,6 +48,12 @@ class SidebarMenu extends Component
      */
     public function render()
     {
+        if ($this->permission) {
+            if (!auth()->user()->can($this->permission)) {
+                return;
+            }
+        }
+        
         return view('components.layout.sidebar-menu');
     }
 }

@@ -18,6 +18,7 @@ class UserResource extends JsonResource
             'id'            => $this->id,
             'username'      => $this->username,
             'fullname'      => $this->fullname,
+            'role'          => optional($this->roles->first())->name,
             'last_seen_at'  => $this->last_seen_at,
             'attempt_ip'    => $this->attempt_ip
         ];

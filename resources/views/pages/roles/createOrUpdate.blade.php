@@ -41,7 +41,7 @@
                 <x-input name='name' label='Name' :bind="$role" />
 
                 @foreach ($permissions as $permission)
-                    <x-checkbox name='permissions[{{$loop->index}}]' :label='ucwords($permission->name)' :value='$permission->name' :checked="$role->hasPermissionTo($permission->name)" />
+                    <x-checkbox name='permissions[{{$loop->index}}]' :label='ucwords($permission->name)' :value='$permission->name' :checked='$role->hasPermissionTo($permission->name)' />
                 @endforeach
 
                 <div class="text-right">

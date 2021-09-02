@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use RealRashid\SweetAlert\Facades\Alert;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -34,8 +35,12 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (\Spatie\Permission\Exceptions\UnauthorizedException $e, $request) {
+
+            // Send Alert
+            Alert::html('Unauthorize User', 'You does not have the right permissions. <br> Please contact your <b>Administrator</b>', 'warning');
+            
+            return back();
         });
     }
 }

@@ -17,11 +17,11 @@ class UserController extends Controller
     {
         // Convert to query
         $user = User::query();
-        
+
         $user = $user->when(request()->has('roles'), function ($q) {
             return $q->role(request('roles'));
         });
 
-        return UserResource::collection($user->orderBy('username')->get());
+        return UserResource::collection($user->with('roles')->orderBy('username')->get());
     }
 }
